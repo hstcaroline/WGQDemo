@@ -17,8 +17,8 @@
                     <h3>工程号管理</h3>
                     <div class="row">
                         <div class="col-sm-8">
-                            <button class="btn btn-info" type="button" onclick="addProjNo()">添加</button>
-                            <button class="btn btn-info" type="button" onclick="deleteProjNo()">删除</button>
+                            <button class="btn btn-info" type="button" onclick="addRow(projNoGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(projNoGrid)">删除</button>
                             <button class="btn btn-info" type="button" onclick="saveProjNo()">保存</button>
                         </div>
                         <div class="col-sm-4">
@@ -30,8 +30,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12" style="padding-top: 20px">
-                            <div id="projNoTable" class="mini-datagrid"
-                                 url="scripts/mock/projectNos.json" idField="id" allowResize="true"
+                            <div id="projNoTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/projectNos.json" idField="id"
                                  sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                                  allowCellSelect="true" multiSelect="true"
                                  editNextOnEnterKey="true" editNextRowCell="true">
@@ -53,8 +53,8 @@
                     <h3>合同编号定义</h3>
                     <div class="row">
                         <div class="col-sm-8">
-                            <button class="btn btn-info" type="button" onclick="addContract()">添加</button>
-                            <button class="btn btn-info" type="button" onclick="deleteContract()">删除</button>
+                            <button class="btn btn-info" type="button" onclick="addRow(contractGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(contractGrid)">删除</button>
                             <button class="btn btn-info" type="button" onclick="saveContract()">保存</button>
                         </div>
                         <div class="col-sm-4">
@@ -66,8 +66,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12" style="padding-top: 20px">
-                            <div id="contractTable" class="mini-datagrid"
-                                 url="scripts/mock/contracts.json" idField="id" allowResize="true"
+                            <div id="contractTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/contracts.json" idField="id"
                                  sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                                  allowCellSelect="true" multiSelect="true"
                                  editNextOnEnterKey="true" editNextRowCell="true">
@@ -109,24 +109,38 @@
     //标签页
     var tabs = mini.get("tabs");
 
-    projNoGrid.load();
-
-    function importProjNo() {
-        console.log('import');
-    }
-
-    function deleteProjNo() {
-        var rows = projNoGrid.getSelecteds();
+    //common
+    function deleteRows(grid){
+        var rows = grid.getSelecteds();
         if (rows.length > 0) {
-            projNoGrid.removeRows(rows, false);
+            grid.removeRows(rows, false);
+        }
+    }
+    function addRow(grid){
+        var newRow = {code:""};
+        grid.addRow(newRow, 0);
+
+        grid.beginEditCell(newRow, "code");
+    }
+    function celleditenter(grid){
+        var index = grid.indexOf(e.record);
+        if (index == grid.getData().length - 1) {
+            var row = {};
+            grid.addRow(row);
+        }
+    }
+    function beforeload(e,grid){
+        if (grid.getChanges().length > 0) {
+            if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
+                e.cancel = true;
+            }
         }
     }
 
-    function addProjNo() {
-        var newRow = {name: ""};
-        projNoGrid.addRow(newRow, 0);
-
-        projNoGrid.beginEditCell(newRow, "name");
+    //工程号
+    projNoGrid.load();
+    function importProjNo() {
+        console.log('import');
     }
     function saveProjNo() {
         var data = projNoGrid.getChanges();
@@ -146,42 +160,17 @@
 //            }
 //        });
     }
-
-    //edit
     projNoGrid.on("celleditenter", function (e) {
-        var index = projNoGrid.indexOf(e.record);
-        if (index == projNoGrid.getData().length - 1) {
-            var row = {};
-            projNoGrid.addRow(row);
-        }
+        celleditenter(projNoGrid);
     });
-
     projNoGrid.on("beforeload", function (e) {
-        if (projNoGrid.getChanges().length > 0) {
-            if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
-                e.cancel = true;
-            }
-        }
+        beforeload(e, projNoGrid);
     });
 
+    //合同编号定义
     contractGrid.load();
-
     function importContract() {
         console.log('import');
-    }
-
-    function deleteContract() {
-        var rows = contractGrid.getSelecteds();
-        if (rows.length > 0) {
-            contractGrid.removeRows(rows, false);
-        }
-    }
-
-    function addContract() {
-        var newRow = {name: ""};
-        contractGrid.addRow(newRow, 0);
-
-        contractGrid.beginEditCell(newRow, "name");
     }
     function saveContract() {
         var data = contractGrid.getChanges();
@@ -201,22 +190,11 @@
 //            }
 //        });
     }
-
-    //edit
     contractGrid.on("celleditenter", function (e) {
-        var index = contractGrid.indexOf(e.record);
-        if (index == contractGrid.getData().length - 1) {
-            var row = {};
-            contractGrid.addRow(row);
-        }
+        celleditenter(contractGrid);
     });
-
     contractGrid.on("beforeload", function (e) {
-        if (contractGrid.getChanges().length > 0) {
-            if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
-                e.cancel = true;
-            }
-        }
+        beforeload(e, contractGrid);
     });
 
 </script>

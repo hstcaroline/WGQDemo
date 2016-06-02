@@ -1,0 +1,23 @@
+/**
+ * Created by zj on 16/5/31.
+ */
+{
+  "total": 3,
+  "data": [
+    {
+      "id": 10001,
+      "code": "PL",
+      "description": "项目信件"
+    },
+    {
+      "id": 10002,
+      "code": "TQ",
+      "description": "技术澄清"
+    },
+    {
+      "id": 10003,
+      "code": "COM-SDRL",
+      "description": "厂商资料意见"
+    }
+  ]
+}

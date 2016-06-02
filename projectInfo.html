@@ -30,7 +30,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12" style="padding-top: 20px">
-                    <div id="projectTable" class="mini-datagrid"
+                    <div id="projectTable" class="mini-datagrid" style="height: 400px"
                          url="scripts/mock/projects.json" idField="id" allowResize="true"
                          sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                          allowCellSelect="true" multiSelect="true"
@@ -76,10 +76,10 @@
         return s;
     }
     function configure(id) {
-        alert(id);
+        window.location.href="projectConfig.html?id="+id;
     }
     function manageProjNo(id) {
-        alert(id);
+        window.location.href="generalConfig.html?id="+id;
     }
     function deleteProj() {
         var rows = grid.getSelecteds();
@@ -88,20 +88,6 @@
         }
     }
     function addProj() {
-//        弹出框
-//        mini.open({
-//            url: "./frame/project.html",
-//            title: "新增项目", width: 240, height: 200,
-//            onload: function () {
-//                var iframe = this.getIFrameEl();
-//                var data = { action: "new"};
-//                iframe.contentWindow.SetData(data);
-//            },
-//            ondestroy: function (action) {
-//                grid.reload();
-//            }
-//        });
-//        直接添加空白行
         var newRow = { name: "" };
         grid.addRow(newRow, 0);
 
@@ -137,7 +123,6 @@
         }
     });
 
-    //edit
     grid.on("celleditenter", function (e) {
         var index = grid.indexOf(e.record);
         if (index == grid.getData().length - 1) {

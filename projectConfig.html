@@ -17,8 +17,8 @@
                     <h3>项目角色</h3>
                     <div class="row">
                         <div class="col-sm-8">
-                            <button class="btn btn-info" type="button" onclick="addRole()">添加</button>
-                            <button class="btn btn-info" type="button" onclick="deleteRole()">删除</button>
+                            <button class="btn btn-info" type="button" onclick="addRow(roleGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(roleGrid)">删除</button>
                             <button class="btn btn-info" type="button" onclick="saveRole()">保存</button>
                         </div>
                         <div class="col-sm-4">
@@ -30,18 +30,18 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12" style="padding-top: 20px">
-                            <div id="roleTable" class="mini-datagrid"
-                                 url="scripts/mock/roles.json" idField="id" allowResize="true"
+                            <div id="roleTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/roles.json" idField="id"
                                  sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                                  allowCellSelect="true" multiSelect="true"
                                  editNextOnEnterKey="true" editNextRowCell="true">
                                 <div property="columns">
-                                    <div type="indexcolumn"></div>
-                                    <div type="checkcolumn"></div>
-                                    <div name="code" field="code" width="120" headerAlign="center" allowSort="true">角色编码
+                                    <div type="indexcolumn" width="10"></div>
+                                    <div type="checkcolumn" width="10"></div>
+                                    <div name="code" field="code" headerAlign="center" allowSort="true">角色编码
                                         <input property="editor" class="mini-textbox" style="width:100%;"/>
                                     </div>
-                                    <div name="description" field="description" width="120" headerAlign="center">角色描述
+                                    <div name="description" field="description" headerAlign="center">角色描述
                                         <input property="editor" class="mini-textarea" style="width:100%;"
                                                minHeight="50"/>
                                     </div>
@@ -54,35 +54,35 @@
                     <h3>业务组信息</h3>
                     <div class="row">
                         <div class="col-sm-8">
-                            <button class="btn btn-info" type="button" onclick="addGroup()">添加</button>
-                            <button class="btn btn-info" type="button" onclick="deleteGroup()">删除</button>
+                            <button class="btn btn-info" type="button" onclick="addRow(groupGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(groupGrid)">删除</button>
                             <button class="btn btn-info" type="button" onclick="saveGroup()">保存</button>
                         </div>
                         <div class="col-sm-4">
                             <span>从项目：</span>
                             <input id="projectCombo2" class="mini-combobox" style="width:150px;" textField="name" valueField="id"
                                    url="scripts/mock/projects.json"/>
-                            <button class="btn btn-primary" type="button" onclick="importHost()">导入</button>
+                            <button class="btn btn-primary" type="button" onclick="importGroup()">导入</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12" style="padding-top: 20px">
-                            <div id="groupTable" class="mini-datagrid"
-                                 url="scripts/mock/hosts.json" idField="id" allowResize="true"
+                            <div id="groupTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/groups.json" idField="id"
                                  sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                                  allowCellSelect="true" multiSelect="true"
                                  editNextOnEnterKey="true" editNextRowCell="true">
                                 <div property="columns">
-                                    <div type="indexcolumn"></div>
-                                    <div name="code" field="code" width="120" headerAlign="center" allowSort="true">业务组编码
+                                    <div type="indexcolumn" width="10"></div>
+                                    <div type="checkcolumn" width="10"></div>
+                                    <div name="code" field="code" headerAlign="center" allowSort="true">业务组编码
                                         <input property="editor" class="mini-textbox" style="width:100%;"/>
                                     </div>
-                                    <div type="comboboxcolumn" autoShowPopup="true" name="type" field="type"
-                                         width="120" allowSort="true"  align="center" headerAlign="center">业务组描述
-                                        <input property="editor" class="mini-combobox" style="width:100%;" data="types" />
+                                    <div name="description" field="description" headerAlign="center">业务组描述
+                                        <input property="editor" class="mini-textbox" style="width:100%;" />
                                     </div>
-
-                                    <div name="action" width="120" headerAlign="center" align="center" renderer="onActionRenderer"
+                                    <div type="checkboxcolumn" field="majorFlag" trueValue="1" falseValue="0" width="60" headerAlign="center">是否分专业</div>
+                                    <div name="action" width="120" headerAlign="center" align="center" renderer="onGroupActionRenderer"
                                          cellStyle="padding:0;">操作
                                     </div>
                                 </div>
@@ -90,15 +90,48 @@
                         </div>
                     </div>
                 </div>
-                <div title="文件类型">
-                    3
+                <div name="file" title="文件类型">
+                    <h3>文件类型</h3>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <button class="btn btn-info" type="button" onclick="addRow(fileGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(fileGrid)">删除</button>
+                            <button class="btn btn-info" type="button" onclick="saveFile()">保存</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <span>从项目：</span>
+                            <input id="projectCombo3" class="mini-combobox" style="width:150px;" textField="name" valueField="id"
+                                   url="scripts/mock/projects.json"/>
+                            <button class="btn btn-primary" type="button" onclick="importFile()">导入</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="padding-top: 20px">
+                            <div id="fileTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/files.json" idField="id"
+                                 sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
+                                 allowCellSelect="true" multiSelect="true"
+                                 editNextOnEnterKey="true" editNextRowCell="true">
+                                <div property="columns">
+                                    <div type="indexcolumn" width="10"></div>
+                                    <div type="checkcolumn" width="10"></div>
+                                    <div name="code" field="code" headerAlign="center" allowSort="true">文件类型编号
+                                        <input property="editor" class="mini-textbox" style="width:100%;"/>
+                                    </div>
+                                    <div name="description" field="description" headerAlign="center">文件类型描述
+                                        <input property="editor" class="mini-textarea" style="width:100%;" minHeight="50"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div name="host" title="承办类型定义">
                     <h3>承办类型</h3>
                     <div class="row">
                         <div class="col-sm-8">
-                            <button class="btn btn-info" type="button" onclick="addHost()">添加</button>
-                            <button class="btn btn-info" type="button" onclick="deleteHost()">删除</button>
+                            <button class="btn btn-info" type="button" onclick="addRow(hostGrid)">添加</button>
+                            <button class="btn btn-info" type="button" onclick="deleteRows(hostGrid)">删除</button>
                             <button class="btn btn-info" type="button" onclick="saveHost()">保存</button>
                         </div>
                         <div class="col-sm-4">
@@ -110,18 +143,19 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12" style="padding-top: 20px">
-                            <div id="hostTable" class="mini-datagrid"
-                                 url="scripts/mock/hosts.json" idField="id" allowResize="true"
+                            <div id="hostTable" class="mini-datagrid" style="height: 400px"
+                                 url="scripts/mock/hosts.json" idField="id"
                                  sizeList="[20,30,50,100]" pageSize="20" allowCellEdit="true"
                                  allowCellSelect="true" multiSelect="true"
                                  editNextOnEnterKey="true" editNextRowCell="true">
                                 <div property="columns">
-                                    <div type="indexcolumn"></div>
-                                    <div name="code" field="code" width="120" headerAlign="center" allowSort="true">承办类别编码
+                                    <div type="indexcolumn" width="10"></div>
+                                    <div type="checkcolumn" width="10"></div>
+                                    <div name="code" field="code" headerAlign="center" allowSort="true">承办类别编码
                                         <input property="editor" class="mini-textbox" style="width:100%;"/>
                                     </div>
                                     <div type="comboboxcolumn" autoShowPopup="true" name="type" field="type"
-                                         width="120" allowSort="true"  align="center" headerAlign="center">承办类别描述
+                                         allowSort="true"  align="center" headerAlign="center">承办类别描述
                                         <input property="editor" class="mini-combobox" style="width:100%;" data="types" />
                                     </div>
                                     <div type="checkboxcolumn" field="replyFlag" trueValue="1" falseValue="0" width="60" headerAlign="center">是否可撰写回复</div>
@@ -144,121 +178,101 @@
     //选择项目
     var projectCombo1 = mini.get("projectCombo1"); //角色
     var projectCombo2 = mini.get("projectCombo2"); //业务组
+    var projectCombo3 = mini.get("projectCombo3"); //业务组
     var projectCombo4 = mini.get("projectCombo4"); //承办类型
 
     //项目角色管理
     var roleGrid = mini.get("roleTable");
     //业务组管理
     var groupGrid = mini.get("groupTable");
+    //文件类型
+    var fileGrid = mini.get("fileTable");
     //承办类别定义的表格
     var hostGrid = mini.get("hostTable");
 
     //标签页
     var tabs = mini.get("tabs");
 
-    //角色
-    roleGrid.load();
-    function importRole() {
-        console.log('import');
-    }
-    function deleteRole() {
-        var rows = roleGrid.getSelecteds();
+    //common
+    function deleteRows(grid){
+        var rows = grid.getSelecteds();
         if (rows.length > 0) {
-            roleGrid.removeRows(rows, false);
+            grid.removeRows(rows, false);
         }
     }
-    function addRole() {
-//        弹出框
-//        mini.open({
-//            url: "./frame/project.html",
-//            title: "新增项目", width: 240, height: 200,
-//            onload: function () {
-//                var iframe = this.getIFrameEl();
-//                var data = { action: "new"};
-//                iframe.contentWindow.SetData(data);
-//            },
-//            ondestroy: function (action) {
-//                grid.reload();
-//            }
-//        });
-//        直接添加空白行
-        var newRow = {name: ""};
-        roleGrid.addRow(newRow, 0);
+    function addRow(grid){
+        var newRow = {code:""};
+        grid.addRow(newRow, 0);
 
-        roleGrid.beginEditCell(newRow, "name");
+        grid.beginEditCell(newRow, "code");
     }
-    function saveRole() {
-        var data = roleGrid.getChanges();
-        var json = mini.encode(data);
-
-//        grid.loading("保存中，请稍后......");
-        console.log(json);
-//        $.ajax({
-//            url: "../data/AjaxService.aspx?method=SaveEmployees",
-//            data: { data: json },
-//            type: "post",
-//            success: function (text) {
-//                grid.reload();
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                alert(jqXHR.responseText);
-//            }
-//        });
-    }
-    roleGrid.on("celleditenter", function (e) {
-        var index = roleGrid.indexOf(e.record);
-        if (index == roleGrid.getData().length - 1) {
+    function celleditenter(grid){
+        var index = grid.indexOf(e.record);
+        if (index == grid.getData().length - 1) {
             var row = {};
-            roleGrid.addRow(row);
+            grid.addRow(row);
         }
-    });
-    roleGrid.on("beforeload", function (e) {
-        if (roleGrid.getChanges().length > 0) {
+    }
+    function beforeload(e,grid){
+        if (grid.getChanges().length > 0) {
             if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
                 e.cancel = true;
             }
         }
+    }
+    //角色
+    roleGrid.load();
+    function importRole() {
+        console.log(projectCombo1.getValue());
+    }
+    function saveRole() {
+        var data = roleGrid.getChanges();
+        var json = mini.encode(data);
+//        grid.loading("保存中，请稍后......");
+        console.log(json);
+    }
+    roleGrid.on("celleditenter", function (e) {
+        celleditenter(roleGrid);
+    });
+    roleGrid.on("beforeload", function (e) {
+        beforeload(e, roleGrid);
     });
 
     //业务组
     groupGrid.load();
-    function importGroup() {
-        console.log('import');
-    }
-    function deleteGroup() {
-        var rows = roleGrid.getSelecteds();
-        if (rows.length > 0) {
-            roleGrid.removeRows(rows, false);
-        }
-    }
-    function addGroup() {
+    function majorManage(id) {
 //        弹出框
-//        mini.open({
-//            url: "./frame/project.html",
-//            title: "新增项目", width: 240, height: 200,
-//            onload: function () {
-//                var iframe = this.getIFrameEl();
-//                var data = { action: "new"};
-//                iframe.contentWindow.SetData(data);
-//            },
-//            ondestroy: function (action) {
-//                grid.reload();
-//            }
-//        });
-//        直接添加空白行
-        var newRow = {name: ""};
-        groupGrid.addRow(newRow, 0);
+        mini.open({
+            url: "./frame/major.html",
+            title: "专业信息", width: 400, height: 360,
+            onload: function () {
+                var iframe = this.getIFrameEl();
+                var data = { id: id};
+                iframe.contentWindow.SetData(data);
+            },
+            ondestroy: function (action) {
+            }
+        });
+    }
+    function onGroupActionRenderer(e) {
+        var record = e.record;
+        var id = record.id;
 
-        groupGrid.beginEditCell(newRow, "name");
+        var s = '<a href="javascript:majorManage(' + id + ')">专业信息管理</a> ';
+        if(record.majorFlag==0)
+            s='';
+        return s;
+    }
+    function importGroup() {
+        console.log(projectCombo2.getValue());
     }
     function saveGroup() {
         var data = groupGrid.getChanges();
         var json = mini.encode(data);
-
 //        grid.loading("保存中，请稍后......");
         console.log(json);
 //        $.ajax({
-//            url: "../data/AjaxService.aspx?method=SaveEmployees",
+//            url: url,
 //            data: { data: json },
 //            type: "post",
 //            success: function (text) {
@@ -270,81 +284,45 @@
 //        });
     }
     groupGrid.on("celleditenter", function (e) {
-        var index = groupGrid.indexOf(e.record);
-        if (index == groupGrid.getData().length - 1) {
-            var row = {};
-            groupGrid.addRow(row);
-        }
+        celleditenter(groupGrid);
     });
     groupGrid.on("beforeload", function (e) {
-        if (groupGrid.getChanges().length > 0) {
-            if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
-                e.cancel = true;
-            }
-        }
+        beforeload(e, groupGrid);
+    });
+    //文件类型
+    fileGrid.load();
+    function importFile() {
+        console.log(projectCombo3.getValue());
+    }
+    function saveFile() {
+        var data = fileGrid.getChanges();
+        var json = mini.encode(data);
+
+        console.log(json);
+    }
+    fileGrid.on("celleditenter", function (e) {
+        celleditenter(fileGrid);
+    });
+    fileGrid.on("beforeload", function (e) {
+        beforeload(e, fileGrid);
     });
 
     //承办类型
     hostGrid.load();
     function importHost() {
-        console.log('import');
-    }
-    function deleteHost() {
-        var rows = hostGrid.getSelecteds();
-        if (rows.length > 0) {
-            hostGrid.removeRows(rows, false);
-        }
-    }
-    function addHost() {
-//        弹出框
-//        mini.open({
-//            url: "./frame/project.html",
-//            title: "新增项目", width: 240, height: 200,
-//            onload: function () {
-//                var iframe = this.getIFrameEl();
-//                var data = { action: "new"};
-//                iframe.contentWindow.SetData(data);
-//            },
-//            ondestroy: function (action) {
-//                grid.reload();
-//            }
-//        });
-//        直接添加空白行
-        var newRow = {name: ""};
-        hostGrid.addRow(newRow, 0);
-        hostGrid.beginEditCell(newRow, "name");
+        console.log(projectCombo4.getValue());
     }
     function saveHost() {
         var data = hostGrid.getChanges();
         var json = mini.encode(data);
 
-//        grid.loading("保存中，请稍后......");
         console.log(json);
-//        $.ajax({
-//            url: "../data/AjaxService.aspx?method=SaveEmployees",
-//            data: { data: json },
-//            type: "post",
-//            success: function (text) {
-//                grid.reload();
-//            },
-//            error: function (jqXHR, textStatus, errorThrown) {
-//                alert(jqXHR.responseText);
-//            }
-//        });
     }
     hostGrid.on("celleditenter", function (e) {
-        var index = hostGrid.indexOf(e.record);
-        if (index == hostGrid.getData().length - 1) {
-            var row = {};
-            hostGrid.addRow(row);
-        }
+        celleditenter(hostGrid);
     });
     hostGrid.on("beforeload", function (e) {
-        if (hostGrid.getChanges().length > 0) {
-            if (confirm("有增删改的数据未保存，是否取消本次操作？")) {
-                e.cancel = true;
-            }
-        }
+        beforeload(e, hostGrid);
     });
 
 </script>

@@ -1,0 +1,32 @@
+/**
+ * Created by zj on 16/6/2.
+ */
+{
+  "total": 5,
+  "data": [
+    {
+      "id": 1001,
+      "code": "G0001",
+      "description": "业务组1",
+      "majorFlag": 1
+    },
+    {
+      "id": 1002,
+      "code": "G0002",
+      "description": "业务组2",
+      "majorFlag": 1
+    },
+    {
+      "id": 1003,
+      "code": "G0003",
+      "description": "业务组3",
+      "majorFlag": 0
+    },
+    {
+      "id": 1004,
+      "code": "G0004",
+      "description": "业务组4",
+      "majorFlag": 1
+    }
+  ]
+}
