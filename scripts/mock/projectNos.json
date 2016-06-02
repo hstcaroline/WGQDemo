@@ -1,0 +1,23 @@
+/**
+ * Created by zj on 2/6/31.
+ */
+{
+  "total": 3,
+  "data": [
+    {
+      "id": 10001,
+      "code": "A0001",
+      "description": "工程1"
+    },
+    {
+      "id": 10002,
+      "code": "A0002",
+      "description": "工程2"
+    },
+    {
+      "id": 10003,
+      "code": "A0003",
+      "description": "工程3"
+    }
+  ]
+}

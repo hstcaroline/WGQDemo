@@ -1,0 +1,38 @@
+/**
+ * Created by zj on 16/6/1.
+ */
+{
+  "total": 5,
+  "data": [
+    {
+      "id": 80001,
+      "code": "ZZZZZ",
+      "type": 1,
+      "replyFlag": 0
+    },
+    {
+      "id": 80002,
+      "code": "BBBBB",
+      "type": 2,
+      "replyFlag": 1
+    },
+    {
+      "id": 80003,
+      "code": "CCCCC",
+      "type": 3,
+      "replyFlag": 0
+    },
+    {
+      "id": 80004,
+      "code": "DDDDD",
+      "type": 1,
+      "replyFlag": 1
+    },
+    {
+      "id": 80005,
+      "code": "AAAAA",
+      "type": 2,
+      "replyFlag": 0
+    }
+  ]
+}

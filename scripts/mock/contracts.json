@@ -1,0 +1,23 @@
+/**
+ * Created by zj on 16/5/31.
+ */
+{
+  "total": 3,
+  "data": [
+    {
+      "id": 30001,
+      "code": "C0001",
+      "description": "合同1"
+    },
+    {
+      "id": 30002,
+      "code": "C0002",
+      "description": "合同2"
+    },
+    {
+      "id": 30003,
+      "code": "C0003",
+      "description": "合同3"
+    }
+  ]
+}

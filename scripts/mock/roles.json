@@ -1,0 +1,33 @@
+/**
+ * Created by zj on 16/5/31.
+ */
+{
+  "total": 6,
+  "data": [
+    {
+      "id": 30001,
+      "code": "R0001",
+      "description": "项目经理"
+    }, {
+      "id": 30002,
+      "code": "R0002",
+      "description": "分经理"
+    }, {
+      "id": 30003,
+      "code": "R0003",
+      "description": "主师"
+    },{
+      "id": 30004,
+      "code": "R0004",
+      "description": "主管"
+    },{
+      "id": 30005,
+      "code": "R0005",
+      "description": "普通用户"
+    },{
+      "id": 30006,
+      "code": "R0006",
+      "description": "文控人员"
+    }
+  ]
+}
